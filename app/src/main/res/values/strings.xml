@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Walkabout</string>
+    <string name="button_addWalk">Add Walk</string>
 </resources>
