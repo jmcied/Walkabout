@@ -2,4 +2,7 @@
     <string name="app_name">Walkabout</string>
     <string name="button_addWalk">Add Walk</string>
     <string name="hint_walkTitle">Walk Title</string>
+    <string name="hint_walkDescription">Description </string>
+    <string name="hint_walkDifficulty">Difficulty </string>
+    <string name="hint_walkTerrain">Terrain </string>
 </resources>
