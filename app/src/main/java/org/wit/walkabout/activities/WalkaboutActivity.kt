@@ -29,6 +29,14 @@ class WalkaboutActivity : AppCompatActivity() {
         app = application as MainApp
         i("Walkabout Activity started")
 
+        if (intent.hasExtra("walk_edit")) {
+            walk = intent.extras?.getParcelable("walk_edit")!!
+            binding.walkTitle.setText(walk.title)
+            binding.description.setText(walk.description)
+            binding.difficulty.setText(walk.difficulty)
+            binding.terrain.setText(walk.terrain)
+        }
+
         binding.btnAdd.setOnClickListener() {
             walk.title = binding.walkTitle.text.toString()
             walk.description = binding.description.text.toString()

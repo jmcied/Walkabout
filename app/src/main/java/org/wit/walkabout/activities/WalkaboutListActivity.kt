@@ -57,8 +57,9 @@ class WalkaboutListActivity : AppCompatActivity(), WalkaboutListener {
                 notifyItemRangeChanged(0,app.walks.findAll().size)
             }
         }
-    override fun onWalkaboutClick(placemark: WalkaboutModel) {
+    override fun onWalkaboutClick(walk: WalkaboutModel) {
         val launcherIntent = Intent(this, WalkaboutActivity::class.java)
+        launcherIntent.putExtra("walk_edit", walk)
         getClickResult.launch(launcherIntent)
     }
 
