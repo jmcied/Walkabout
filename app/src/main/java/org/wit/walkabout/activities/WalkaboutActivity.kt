@@ -43,6 +43,9 @@ class WalkaboutActivity : AppCompatActivity() {
             binding.description.setText(walk.description)
             binding.difficulty.setText(walk.difficulty)
             binding.terrain.setText(walk.terrain)
+            Picasso.get()
+                .load(walk.image)
+                .into(binding.walkImage)
             binding.btnAdd.setText(R.string.save_walk)
         }
 
