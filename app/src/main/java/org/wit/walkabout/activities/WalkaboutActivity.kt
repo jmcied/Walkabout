@@ -57,6 +57,10 @@ class WalkaboutActivity : AppCompatActivity() {
                 setResult(RESULT_OK)
                 finish()
         }
+
+        binding.chooseImage.setOnClickListener {
+            i("Select image")
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
