@@ -33,8 +33,9 @@ class WalkaboutActivity : AppCompatActivity() {
                 i("add Button Pressed: ${walk}")
                 for (i in app.walks.indices) {
                     i("Walk[$i]:${this.app.walks[i]}")
-
                 }
+                setResult(RESULT_OK)
+                finish()
             } else {
                 Snackbar
                     .make(it, "Please Enter a title", Snackbar.LENGTH_LONG)

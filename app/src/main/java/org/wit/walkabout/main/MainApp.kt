@@ -11,8 +11,8 @@ class MainApp : Application() {
         super.onCreate()
         Timber.plant(Timber.DebugTree())
         i("Walkabout started")
-        walks.add(WalkaboutModel("One", "About One...", "Easy", "Sand"))
-        walks.add(WalkaboutModel("Two", "About Two...", "Medium", "Grass"))
-        walks.add(WalkaboutModel("Three", "About Three...", "Hard", "Hill"))
+       // walks.add(WalkaboutModel("One", "About One...", "Easy", "Sand"))
+       // walks.add(WalkaboutModel("Two", "About Two...", "Medium", "Grass"))
+       // walks.add(WalkaboutModel("Three", "About Three...", "Hard", "Hill"))
     }
 }
