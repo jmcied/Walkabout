@@ -1,6 +1,7 @@
 package org.wit.walkabout.activities
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -46,6 +47,9 @@ class WalkaboutActivity : AppCompatActivity() {
             Picasso.get()
                 .load(walk.image)
                 .into(binding.walkImage)
+            if (walk.image != Uri.EMPTY) {
+                binding.chooseImage.setText(R.string.change_walk_image)
+            }
             binding.btnAdd.setText(R.string.save_walk)
         }
 
@@ -100,6 +104,7 @@ class WalkaboutActivity : AppCompatActivity() {
                             Picasso.get()
                                 .load(walk.image)
                                 .into(binding.walkImage)
+                            binding.chooseImage.setText(R.string.change_walk_image)
                         } // end of if
                     }
                     RESULT_CANCELED -> { } else -> { }
