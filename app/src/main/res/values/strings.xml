@@ -5,4 +5,5 @@
     <string name="hint_walkDescription">Description </string>
     <string name="hint_walkDifficulty">Difficulty </string>
     <string name="hint_walkTerrain">Terrain </string>
+    <string name="menu_addWalk">Add</string>
 </resources>

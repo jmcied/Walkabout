@@ -2,10 +2,12 @@ package org.wit.walkabout.activities
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.Menu
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import org.wit.walkabout.R
 import org.wit.walkabout.databinding.ActivityWalkaboutListBinding
 import org.wit.walkabout.databinding.CardWalkaboutBinding
 import org.wit.walkabout.main.MainApp
@@ -19,15 +21,24 @@ class WalkaboutListActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityWalkaboutListBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        binding.toolbar.title = title
+        setSupportActionBar(binding.toolbar)
 
         app = application as MainApp
 
         val layoutManager = LinearLayoutManager(this)
         binding.recyclerView.layoutManager = layoutManager
         binding.recyclerView.adapter = WalkaboutAdapter(app.walks)
-
     }
-}
+
+        override fun onCreateOptionsMenu(menu: Menu): Boolean {
+            menuInflater.inflate(R.menu.menu_main, menu)
+            return super.onCreateOptionsMenu(menu)
+        }
+    }
+
+
+
 
 class WalkaboutAdapter constructor(private var walks: List<WalkaboutModel>) :
     RecyclerView.Adapter<WalkaboutAdapter.MainHolder>() {
