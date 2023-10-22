@@ -26,6 +26,8 @@ class WalkaboutMemStore : WalkaboutStore {
         if (foundWalk != null) {
             foundWalk.title = walk.title
             foundWalk.description = walk.description
+            foundWalk.difficulty = walk.difficulty
+            foundWalk.terrain = walk.terrain
             logAll()
         }
     }
