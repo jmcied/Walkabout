@@ -28,7 +28,7 @@ class WalkaboutListActivity : AppCompatActivity() {
 
         val layoutManager = LinearLayoutManager(this)
         binding.recyclerView.layoutManager = layoutManager
-        binding.recyclerView.adapter = WalkaboutAdapter(app.walks)
+        binding.recyclerView.adapter = WalkaboutAdapter(app.walks.findAll())
     }
 
         override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -52,7 +52,7 @@ class WalkaboutListActivity : AppCompatActivity() {
         ) {
             if (it.resultCode == Activity.RESULT_OK) {
                 (binding.recyclerView.adapter)?.
-                notifyItemRangeChanged(0,app.walks.size)
+                notifyItemRangeChanged(0,app.walks.findAll().size)
             }
         }
     }

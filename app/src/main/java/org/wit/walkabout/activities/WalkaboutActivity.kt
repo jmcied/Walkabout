@@ -35,11 +35,7 @@ class WalkaboutActivity : AppCompatActivity() {
             walk.difficulty = binding.difficulty.text.toString()
             walk.terrain = binding.terrain.text.toString()
             if (walk.title.isNotEmpty()) {
-                app.walks.add(walk.copy())
-                i("add Button Pressed: ${walk}")
-                for (i in app.walks.indices) {
-                    i("Walk[$i]:${this.app.walks[i]}")
-                }
+                app.walks.create(walk.copy())
                 setResult(RESULT_OK)
                 finish()
             } else {
