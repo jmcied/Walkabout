@@ -1,6 +1,7 @@
 package org.wit.walkabout.activities
 
 import WalkaboutAdapter
+import WalkaboutListener
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
@@ -12,8 +13,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import org.wit.walkabout.R
 import org.wit.walkabout.databinding.ActivityWalkaboutListBinding
 import org.wit.walkabout.main.MainApp
+import org.wit.walkabout.models.WalkaboutModel
 
-class WalkaboutListActivity : AppCompatActivity() {
+class WalkaboutListActivity : AppCompatActivity(), WalkaboutListener {
 
     lateinit var app: MainApp
     private lateinit var binding: ActivityWalkaboutListBinding
@@ -28,7 +30,7 @@ class WalkaboutListActivity : AppCompatActivity() {
 
         val layoutManager = LinearLayoutManager(this)
         binding.recyclerView.layoutManager = layoutManager
-        binding.recyclerView.adapter = WalkaboutAdapter(app.walks.findAll())
+        binding.recyclerView.adapter = WalkaboutAdapter(app.walks.findAll(),this)
     }
 
         override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -47,6 +49,20 @@ class WalkaboutListActivity : AppCompatActivity() {
     }
 
     private val getResult =
+        registerForActivityResult(
+            ActivityResultContracts.StartActivityForResult()
+        ) {
+            if (it.resultCode == Activity.RESULT_OK) {
+                (binding.recyclerView.adapter)?.
+                notifyItemRangeChanged(0,app.walks.findAll().size)
+            }
+        }
+    override fun onWalkaboutClick(placemark: WalkaboutModel) {
+        val launcherIntent = Intent(this, WalkaboutActivity::class.java)
+        getClickResult.launch(launcherIntent)
+    }
+
+    private val getClickResult =
         registerForActivityResult(
             ActivityResultContracts.StartActivityForResult()
         ) {

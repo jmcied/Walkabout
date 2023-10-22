@@ -4,7 +4,11 @@ import androidx.recyclerview.widget.RecyclerView
 import org.wit.walkabout.databinding.CardWalkaboutBinding
 import org.wit.walkabout.models.WalkaboutModel
 
-class WalkaboutAdapter constructor(private var walks: List<WalkaboutModel>) :
+interface WalkaboutListener {
+    fun onWalkaboutClick(placemark: WalkaboutModel)
+}
+class WalkaboutAdapter constructor(private var walks: List<WalkaboutModel>,
+                                    private val listener: WalkaboutListener) :
     RecyclerView.Adapter<WalkaboutAdapter.MainHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainHolder {
@@ -16,7 +20,7 @@ class WalkaboutAdapter constructor(private var walks: List<WalkaboutModel>) :
 
     override fun onBindViewHolder(holder: MainHolder, position: Int) {
         val walk = walks[holder.adapterPosition]
-        holder.bind(walk)
+        holder.bind(walk, listener)
     }
 
     override fun getItemCount(): Int = walks.size
@@ -24,11 +28,12 @@ class WalkaboutAdapter constructor(private var walks: List<WalkaboutModel>) :
     class MainHolder(private val binding : CardWalkaboutBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(walk: WalkaboutModel) {
+        fun bind(walk: WalkaboutModel, listener: WalkaboutListener) {
             binding.walkTitle.text = walk.title
             binding.description.text = walk.description
             binding.difficulty.text = walk.difficulty
             binding.terrain.text = walk.terrain
+            binding.root.setOnClickListener { listener.onWalkaboutClick(walk) }
         }
     }
 }
