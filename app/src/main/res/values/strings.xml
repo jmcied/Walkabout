@@ -6,4 +6,5 @@
     <string name="hint_walkDifficulty">Difficulty </string>
     <string name="hint_walkTerrain">Terrain </string>
     <string name="menu_addWalk">Add</string>
+    <string name="menu_cancelWalk">Cancel</string>
 </resources>
