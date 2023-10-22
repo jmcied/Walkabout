@@ -1,12 +1,17 @@
 package org.wit.walkabout.activities
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.snackbar.Snackbar
+import com.squareup.picasso.Picasso
 import org.wit.walkabout.R
 import org.wit.walkabout.databinding.ActivityWalkaboutBinding
+import org.wit.walkabout.helpers.showImagePicker
 import org.wit.walkabout.main.MainApp
 import org.wit.walkabout.models.WalkaboutModel
 import timber.log.Timber.i
@@ -18,6 +23,7 @@ class WalkaboutActivity : AppCompatActivity() {
     val walks = ArrayList<WalkaboutModel>()
     lateinit var app: MainApp
     var edit = false
+    private lateinit var imageIntentLauncher : ActivityResultLauncher<Intent>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,8 +65,11 @@ class WalkaboutActivity : AppCompatActivity() {
         }
 
         binding.chooseImage.setOnClickListener {
+            showImagePicker(imageIntentLauncher)
             i("Select image")
         }
+
+        registerImagePickerCallback()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -74,6 +83,25 @@ class WalkaboutActivity : AppCompatActivity() {
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun registerImagePickerCallback() {
+        imageIntentLauncher =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult())
+            { result ->
+                when(result.resultCode){
+                    RESULT_OK -> {
+                        if (result.data != null) {
+                            i("Got Result ${result.data!!.data}")
+                            walk.image = result.data!!.data!!
+                            Picasso.get()
+                                .load(walk.image)
+                                .into(binding.walkImage)
+                        } // end of if
+                    }
+                    RESULT_CANCELED -> { } else -> { }
+                }
+            }
     }
 
 }

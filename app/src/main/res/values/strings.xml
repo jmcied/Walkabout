@@ -10,4 +10,5 @@
     <string name="enter_walk_title">Please enter a Walk Title</string>
     <string name="save_walk">Save Walk</string>
     <string name="button_addImage"> Add Image</string>
+    <string name="select_walk_image">Select walk image</string>
 </resources>
