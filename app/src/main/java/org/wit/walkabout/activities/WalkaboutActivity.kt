@@ -17,6 +17,7 @@ class WalkaboutActivity : AppCompatActivity() {
     var walk = WalkaboutModel()
     val walks = ArrayList<WalkaboutModel>()
     lateinit var app: MainApp
+    var edit = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,11 +31,13 @@ class WalkaboutActivity : AppCompatActivity() {
         i("Walkabout Activity started")
 
         if (intent.hasExtra("walk_edit")) {
+            edit = true
             walk = intent.extras?.getParcelable("walk_edit")!!
             binding.walkTitle.setText(walk.title)
             binding.description.setText(walk.description)
             binding.difficulty.setText(walk.difficulty)
             binding.terrain.setText(walk.terrain)
+            binding.btnAdd.setText(R.string.save_walk)
         }
 
         binding.btnAdd.setOnClickListener() {
@@ -42,15 +45,17 @@ class WalkaboutActivity : AppCompatActivity() {
             walk.description = binding.description.text.toString()
             walk.difficulty = binding.difficulty.text.toString()
             walk.terrain = binding.terrain.text.toString()
-            if (walk.title.isNotEmpty()) {
-                app.walks.create(walk.copy())
+            if (walk.title.isEmpty()) {
+                Snackbar.make(it,R.string.enter_walk_title, Snackbar.LENGTH_LONG).show()
+            } else {
+                if (edit) {
+                    app.walks.update(walk.copy())
+                } else {
+                    app.walks.create(walk.copy())
+                }
+            }
                 setResult(RESULT_OK)
                 finish()
-            } else {
-                Snackbar
-                    .make(it, "Please Enter a title", Snackbar.LENGTH_LONG)
-                    .show()
-            }
         }
     }
 

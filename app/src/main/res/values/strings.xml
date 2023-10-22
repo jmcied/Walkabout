@@ -7,4 +7,6 @@
     <string name="hint_walkTerrain">Terrain </string>
     <string name="menu_addWalk">Add</string>
     <string name="menu_cancelWalk">Cancel</string>
+    <string name="enter_walk_title">Please enter a Walk Title</string>
+    <string name="save_walk">Save Walk</string>
 </resources>
