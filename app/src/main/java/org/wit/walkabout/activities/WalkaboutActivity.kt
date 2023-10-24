@@ -77,6 +77,10 @@ class WalkaboutActivity : AppCompatActivity() {
         }
 
         registerImagePickerCallback()
+
+        binding.walkLocation.setOnClickListener {
+            i ("Set Location Pressed")
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
