@@ -28,6 +28,7 @@ class WalkaboutMemStore : WalkaboutStore {
             foundWalk.description = walk.description
             foundWalk.difficulty = walk.difficulty
             foundWalk.terrain = walk.terrain
+            foundWalk.image = walk.image
             logAll()
         }
     }
