@@ -1,6 +1,7 @@
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.squareup.picasso.Picasso
 import org.wit.walkabout.databinding.CardWalkaboutBinding
 import org.wit.walkabout.models.WalkaboutModel
 
@@ -33,6 +34,7 @@ class WalkaboutAdapter constructor(private var walks: List<WalkaboutModel>,
             binding.description.text = walk.description
             binding.difficulty.text = walk.difficulty
             binding.terrain.text = walk.terrain
+            Picasso.get().load(walk.image).resize(200,200).into(binding.imageIcon)
             binding.root.setOnClickListener { listener.onWalkaboutClick(walk) }
         }
     }
