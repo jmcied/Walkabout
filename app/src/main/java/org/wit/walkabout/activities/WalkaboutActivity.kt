@@ -14,6 +14,7 @@ import org.wit.walkabout.R
 import org.wit.walkabout.databinding.ActivityWalkaboutBinding
 import org.wit.walkabout.helpers.showImagePicker
 import org.wit.walkabout.main.MainApp
+import org.wit.walkabout.models.Location
 import org.wit.walkabout.models.WalkaboutModel
 import timber.log.Timber.i
 
@@ -80,7 +81,9 @@ class WalkaboutActivity : AppCompatActivity() {
         registerImagePickerCallback()
 
         binding.walkLocation.setOnClickListener {
+            val location = Location(52.22, -6.93, 15f)
             val launcherIntent = Intent(this, MapActivity::class.java)
+                .putExtra("location", location)
             mapIntentLauncher.launch(launcherIntent)
         }
 
