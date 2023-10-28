@@ -29,6 +29,9 @@ class WalkaboutMemStore : WalkaboutStore {
             foundWalk.difficulty = walk.difficulty
             foundWalk.terrain = walk.terrain
             foundWalk.image = walk.image
+            foundWalk.lat = walk.lat
+            foundWalk.lng = walk.lng
+            foundWalk.zoom = walk.zoom
             logAll()
         }
     }

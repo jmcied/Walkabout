@@ -12,4 +12,6 @@
     <string name="button_addImage"> Add Image</string>
     <string name="select_walk_image">Select walk image</string>
     <string name="change_walk_image">Change walk image </string>
+    <string name="button_location">Set Location</string>
+    <string name="title_activity_map">MapActivity</string>
 </resources>

@@ -14,6 +14,7 @@ import org.wit.walkabout.R
 import org.wit.walkabout.databinding.ActivityWalkaboutBinding
 import org.wit.walkabout.helpers.showImagePicker
 import org.wit.walkabout.main.MainApp
+import org.wit.walkabout.models.Location
 import org.wit.walkabout.models.WalkaboutModel
 import timber.log.Timber.i
 
@@ -21,16 +22,17 @@ class WalkaboutActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityWalkaboutBinding
     var walk = WalkaboutModel()
-    val walks = ArrayList<WalkaboutModel>()
+    //val walks = ArrayList<WalkaboutModel>()
     lateinit var app: MainApp
-    var edit = false
     private lateinit var imageIntentLauncher : ActivityResultLauncher<Intent>
+    private lateinit var mapIntentLauncher : ActivityResultLauncher<Intent>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        var edit = false
+
         binding = ActivityWalkaboutBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         binding.toolbarAdd.title = title
         setSupportActionBar(binding.toolbarAdd)
 
@@ -44,13 +46,13 @@ class WalkaboutActivity : AppCompatActivity() {
             binding.description.setText(walk.description)
             binding.difficulty.setText(walk.difficulty)
             binding.terrain.setText(walk.terrain)
+            binding.btnAdd.setText(R.string.save_walk)
             Picasso.get()
                 .load(walk.image)
                 .into(binding.walkImage)
             if (walk.image != Uri.EMPTY) {
                 binding.chooseImage.setText(R.string.change_walk_image)
             }
-            binding.btnAdd.setText(R.string.save_walk)
         }
 
         binding.btnAdd.setOnClickListener() {
@@ -76,7 +78,20 @@ class WalkaboutActivity : AppCompatActivity() {
             i("Select image")
         }
 
+        binding.walkLocation.setOnClickListener {
+            val location = Location(52.22, -6.93, 15f)
+            if (walk.zoom != 0f){
+                location.lat = walk.lat
+                location.lng = walk.lng
+                location.zoom = walk.zoom
+            }
+            val launcherIntent = Intent(this, MapActivity::class.java)
+                .putExtra("location", location)
+            mapIntentLauncher.launch(launcherIntent)
+        }
+
         registerImagePickerCallback()
+        registerMapCallback()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -105,6 +120,26 @@ class WalkaboutActivity : AppCompatActivity() {
                                 .load(walk.image)
                                 .into(binding.walkImage)
                             binding.chooseImage.setText(R.string.change_walk_image)
+                        } // end of if
+                    }
+                    RESULT_CANCELED -> { } else -> { }
+                }
+            }
+    }
+
+    private fun registerMapCallback() {
+        mapIntentLauncher =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult())
+            { result ->
+                when (result.resultCode) {
+                    RESULT_OK -> {
+                        if (result.data != null) {
+                            i("Got Location ${result.data.toString()}")
+                            val location = result.data!!.extras?.getParcelable<Location>("location")!!
+                            i("Location == $location")
+                            walk.lat = location.lat
+                            walk.lng = location.lng
+                            walk.zoom = location.zoom
                         } // end of if
                     }
                     RESULT_CANCELED -> { } else -> { }
