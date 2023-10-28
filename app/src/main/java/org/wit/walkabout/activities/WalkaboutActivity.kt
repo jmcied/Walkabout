@@ -1,5 +1,6 @@
 package org.wit.walkabout.activities
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -74,7 +75,7 @@ class WalkaboutActivity : AppCompatActivity() {
         }
 
         binding.chooseImage.setOnClickListener {
-            showImagePicker(imageIntentLauncher)
+            showImagePicker(imageIntentLauncher, this)
             i("Select image")
         }
 
@@ -107,6 +108,7 @@ class WalkaboutActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
+    @SuppressLint("SuspiciousIndentation")
     private fun registerImagePickerCallback() {
         imageIntentLauncher =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult())
@@ -115,7 +117,12 @@ class WalkaboutActivity : AppCompatActivity() {
                     RESULT_OK -> {
                         if (result.data != null) {
                             i("Got Result ${result.data!!.data}")
-                            walk.image = result.data!!.data!!
+
+                         val image = result.data!!.data!!
+                            contentResolver.takePersistableUriPermission(image,
+                                Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                            walk.image = image
+
                             Picasso.get()
                                 .load(walk.image)
                                 .into(binding.walkImage)
