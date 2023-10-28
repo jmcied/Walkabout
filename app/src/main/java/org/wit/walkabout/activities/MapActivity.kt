@@ -42,9 +42,9 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback,
             .draggable(true)
             .position(loc)
         map.addMarker(options)
-        map.moveCamera(CameraUpdateFactory.newLatLngZoom(loc, location.zoom))
         map.setOnMarkerDragListener(this)
         map.setOnMarkerClickListener(this)
+        map.moveCamera(CameraUpdateFactory.newLatLngZoom(loc, location.zoom))
     }
 
     override fun onMarkerClick(marker: Marker): Boolean {
@@ -53,9 +53,7 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback,
         return false
     }
 
-    override fun onMarkerDrag(p0: Marker) {
-        TODO("Not yet implemented")
-    }
+    override fun onMarkerDrag(p0: Marker) { }
 
     override fun onMarkerDragEnd(marker: Marker) {
         location.lat = marker.position.latitude
@@ -63,9 +61,7 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback,
         location.zoom = map.cameraPosition.zoom
     }
 
-    override fun onMarkerDragStart(p0: Marker) {
-        TODO("Not yet implemented")
-    }
+    override fun onMarkerDragStart(p0: Marker) {  }
 
     override fun onBackPressed() {
         val resultIntent = Intent()
