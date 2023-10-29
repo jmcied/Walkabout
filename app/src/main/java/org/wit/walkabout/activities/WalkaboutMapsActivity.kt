@@ -5,12 +5,13 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import org.wit.walkabout.databinding.ActivityWalkaboutMapsBinding
 import org.wit.walkabout.databinding.ContentWalkaboutMapsBinding
 import org.wit.walkabout.main.MainApp
 
-class WalkaboutMapsActivity : AppCompatActivity() {
+class WalkaboutMapsActivity : AppCompatActivity(), GoogleMap.OnMarkerClickListener {
 
     private lateinit var binding: ActivityWalkaboutMapsBinding
     private lateinit var contentBinding: ContentWalkaboutMapsBinding
@@ -33,6 +34,12 @@ class WalkaboutMapsActivity : AppCompatActivity() {
             configureMap()
         }
 
+    }
+
+    override fun onMarkerClick(marker: Marker): Boolean {
+        contentBinding.currentTitle.text = marker.title
+
+        return false
     }
     override fun onDestroy() {
         super.onDestroy()
@@ -66,6 +73,7 @@ class WalkaboutMapsActivity : AppCompatActivity() {
             val options = MarkerOptions().title(it.title).position(loc)
             map.addMarker(options)?.tag = it.id
             map.moveCamera(CameraUpdateFactory.newLatLngZoom(loc, it.zoom))
+            map.setOnMarkerClickListener(this)
         }
     }
 }
