@@ -19,6 +19,7 @@ class WalkaboutListActivity : AppCompatActivity(), WalkaboutListener {
 
     lateinit var app: MainApp
     private lateinit var binding: ActivityWalkaboutListBinding
+    private var position: Int = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityWalkaboutListBinding.inflate(layoutInflater)
@@ -57,9 +58,10 @@ class WalkaboutListActivity : AppCompatActivity(), WalkaboutListener {
                 notifyItemRangeChanged(0,app.walks.findAll().size)
             }
         }
-    override fun onWalkaboutClick(walk: WalkaboutModel) {
+    override fun onWalkaboutClick(walk: WalkaboutModel, pos: Int) {
         val launcherIntent = Intent(this, WalkaboutActivity::class.java)
         launcherIntent.putExtra("walk_edit", walk)
+        position = pos
         getClickResult.launch(launcherIntent)
     }
 
@@ -71,6 +73,9 @@ class WalkaboutListActivity : AppCompatActivity(), WalkaboutListener {
                 (binding.recyclerView.adapter)?.
                 notifyItemRangeChanged(0,app.walks.findAll().size)
             }
+            else // Deleting
+                if (it.resultCode == 99)
+                    (binding.recyclerView.adapter)?.notifyItemRemoved(position)
         }
     }
 

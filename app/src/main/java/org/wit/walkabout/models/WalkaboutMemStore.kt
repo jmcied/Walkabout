@@ -35,6 +35,10 @@ class WalkaboutMemStore : WalkaboutStore {
             logAll()
         }
     }
+
+    override fun delete(walk: WalkaboutModel) {
+        walks.remove(walk)
+    }
     fun logAll() {
         walks.forEach{ i("${it}") }
     }
