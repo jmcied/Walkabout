@@ -2,15 +2,20 @@ package org.wit.walkabout.activities
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MarkerOptions
 import org.wit.walkabout.databinding.ActivityWalkaboutMapsBinding
 import org.wit.walkabout.databinding.ContentWalkaboutMapsBinding
+import org.wit.walkabout.main.MainApp
 
 class WalkaboutMapsActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityWalkaboutMapsBinding
     private lateinit var contentBinding: ContentWalkaboutMapsBinding
     lateinit var map: GoogleMap
+    lateinit var app: MainApp
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -18,10 +23,17 @@ class WalkaboutMapsActivity : AppCompatActivity() {
         setContentView(binding.root)
         setSupportActionBar(binding.toolbar)
 
+        app = application as MainApp
+
         contentBinding = ContentWalkaboutMapsBinding.bind(binding.root)
         contentBinding.mapView.onCreate(savedInstanceState)
 
+        contentBinding.mapView.getMapAsync {
+            map = it
+            configureMap()
         }
+
+    }
     override fun onDestroy() {
         super.onDestroy()
         contentBinding.mapView.onDestroy()
@@ -45,5 +57,15 @@ class WalkaboutMapsActivity : AppCompatActivity() {
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         contentBinding.mapView.onSaveInstanceState(outState)
+    }
+
+    private fun configureMap() {
+        map.uiSettings.isZoomControlsEnabled = true
+        app.walks.findAll().forEach {
+            val loc = LatLng(it.lat, it.lng)
+            val options = MarkerOptions().title(it.title).position(loc)
+            map.addMarker(options)?.tag = it.id
+            map.moveCamera(CameraUpdateFactory.newLatLngZoom(loc, it.zoom))
+        }
     }
 }
