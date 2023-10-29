@@ -6,7 +6,7 @@ import org.wit.walkabout.databinding.CardWalkaboutBinding
 import org.wit.walkabout.models.WalkaboutModel
 
 interface WalkaboutListener {
-    fun onWalkaboutClick(placemark: WalkaboutModel)
+    fun onWalkaboutClick(placemark: WalkaboutModel, position: Int)
 }
 class WalkaboutAdapter constructor(private var walks: List<WalkaboutModel>,
                                     private val listener: WalkaboutListener) :
@@ -35,7 +35,7 @@ class WalkaboutAdapter constructor(private var walks: List<WalkaboutModel>,
             binding.difficulty.text = walk.difficulty
             binding.terrain.text = walk.terrain
             Picasso.get().load(walk.image).resize(200,200).into(binding.imageIcon)
-            binding.root.setOnClickListener { listener.onWalkaboutClick(walk) }
+            binding.root.setOnClickListener { listener.onWalkaboutClick(walk, adapterPosition) }
         }
     }
 }

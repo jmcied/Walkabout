@@ -23,14 +23,14 @@ class WalkaboutActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityWalkaboutBinding
     var walk = WalkaboutModel()
-    //val walks = ArrayList<WalkaboutModel>()
     lateinit var app: MainApp
     private lateinit var imageIntentLauncher : ActivityResultLauncher<Intent>
     private lateinit var mapIntentLauncher : ActivityResultLauncher<Intent>
+    var edit = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        var edit = false
+        edit = false
 
         binding = ActivityWalkaboutBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -97,10 +97,16 @@ class WalkaboutActivity : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_walkabout, menu)
+        if (edit) menu.getItem(0).isVisible = true
         return super.onCreateOptionsMenu(menu)
     }
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
+            R.id.item_delete -> {
+                setResult(99)
+                app.walks.delete(walk)
+                finish()
+            }
             R.id.item_cancel -> {
                 finish()
             }

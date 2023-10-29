@@ -51,7 +51,19 @@ class WalkaboutJSONStore(private val context: Context) : WalkaboutStore {
 
 
     override fun update(walk: WalkaboutModel) {
-        // todo
+        val walksList = findAll() as ArrayList<WalkaboutModel>
+        var foundWalk: WalkaboutModel? = walksList.find { w -> w.id == walk.id }
+        if (foundWalk != null) {
+            foundWalk.title = walk.title
+            foundWalk.description = walk.description
+            foundWalk.difficulty = walk.difficulty
+            foundWalk.terrain = walk.terrain
+            foundWalk.image = walk.image
+            foundWalk.lat = walk.lat
+            foundWalk.lng = walk.lng
+            foundWalk.zoom = walk.zoom
+        }
+        serialize()
     }
 
     private fun serialize() {
@@ -64,6 +76,10 @@ class WalkaboutJSONStore(private val context: Context) : WalkaboutStore {
         walks = gsonBuilder.fromJson(jsonString, listType)
     }
 
+    override fun delete(walk: WalkaboutModel) {
+        walks.remove(walk)
+        serialize()
+    }
     private fun logAll() {
         walks.forEach { Timber.i("$it") }
     }
