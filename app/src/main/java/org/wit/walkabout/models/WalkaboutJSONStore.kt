@@ -83,6 +83,10 @@ class WalkaboutJSONStore(private val context: Context) : WalkaboutStore {
     private fun logAll() {
         walks.forEach { Timber.i("$it") }
     }
+
+    override fun findById(id: Long): WalkaboutModel? {
+        return walks.find { it.id == id }
+    }
 }
 
 class UriParser : JsonDeserializer<Uri>,JsonSerializer<Uri> {
