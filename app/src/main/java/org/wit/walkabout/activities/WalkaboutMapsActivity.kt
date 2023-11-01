@@ -7,6 +7,7 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
+import com.squareup.picasso.Picasso
 import org.wit.walkabout.databinding.ActivityWalkaboutMapsBinding
 import org.wit.walkabout.databinding.ContentWalkaboutMapsBinding
 import org.wit.walkabout.main.MainApp
@@ -37,8 +38,16 @@ class WalkaboutMapsActivity : AppCompatActivity(), GoogleMap.OnMarkerClickListen
     }
 
     override fun onMarkerClick(marker: Marker): Boolean {
-        contentBinding.currentTitle.text = marker.title
+        val tag = marker.tag as Long
+        val walk = app.walks.findById(tag)
 
+        if (walk != null) {
+            contentBinding.currentTitle.text = marker.title
+            contentBinding.currentDescription.text = walk.description
+            contentBinding.currentDifficulty.text = walk.difficulty
+            contentBinding.currentTerrain.text = walk.terrain
+            Picasso.get().load(walk.image).into(contentBinding.currentImage)
+        }
         return false
     }
     override fun onDestroy() {

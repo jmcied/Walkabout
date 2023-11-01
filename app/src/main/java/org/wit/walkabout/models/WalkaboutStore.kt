@@ -5,4 +5,5 @@ interface WalkaboutStore {
     fun create(walk: WalkaboutModel)
     fun update(walk: WalkaboutModel)
     fun delete(walk: WalkaboutModel)
+    fun findById(id:Long) : WalkaboutModel?
 }

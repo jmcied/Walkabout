@@ -42,4 +42,8 @@ class WalkaboutMemStore : WalkaboutStore {
     fun logAll() {
         walks.forEach{ i("${it}") }
     }
+
+    override fun findById(id: Long): WalkaboutModel? {
+        return walks.find { it.id == id }
+    }
 }
