@@ -9,6 +9,7 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.recyclerview.widget.LinearLayoutManager
 import org.wit.walkabout.R
 import org.wit.walkabout.databinding.ActivityWalkaboutListBinding
@@ -22,6 +23,10 @@ class WalkaboutListActivity : AppCompatActivity(), WalkaboutListener {
     private var position: Int = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        Thread.sleep(2000)                      //splash screen timeout
+        installSplashScreen().apply{}
+
         binding = ActivityWalkaboutListBinding.inflate(layoutInflater)
         setContentView(binding.root)
         binding.toolbar.title = title
