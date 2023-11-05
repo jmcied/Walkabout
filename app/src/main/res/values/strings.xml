@@ -17,4 +17,16 @@
     <string name="menu_deleteWalk">Delete</string>
     <string name="title_activity_walkabout_maps">Map of All Walks</string>
 
+    <string name="easy">Easy</string>
+    <string name="medium">Medium</string>
+    <string name="hard">Hard</string>
+    <string name="beach">Beach</string>
+    <string name="forest">Forest</string>
+    <string name="hill">Hill</string>
+
+    <string name="full_name">FULL NAME</string>
+    <string name="email">EMAIL</string>
+    <string name="password">PASSWORD</string>
+    <string name="confirm_password">CONFIRM PASSWORD</string>
+
 </resources>

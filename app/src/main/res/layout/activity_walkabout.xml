@@ -24,20 +24,22 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:titleTextColor="@color/colorPrimary" />
+
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="600dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
+        android:id="@+id/constraintLayout"
+        android:layout_width="404dp"
+        android:layout_height="535dp"
+        android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-    <EditText
+        <EditText
             android:id="@+id/walkTitle"
-            android:layout_width="365dp"
+            android:layout_width="350dp"
             android:layout_height="48dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="64dp"
@@ -52,7 +54,7 @@
 
         <EditText
             android:id="@+id/description"
-            android:layout_width="365dp"
+            android:layout_width="350dp"
             android:layout_height="48dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
@@ -66,80 +68,164 @@
 
         <EditText
             android:id="@+id/difficulty"
-            android:layout_width="365dp"
+            android:layout_width="130dp"
             android:layout_height="48dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:ems="10"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="12dp"
             android:hint="@string/hint_walkDifficulty"
             android:inputType="textPersonName"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/terrain"
+            app:layout_constraintHorizontal_bias="0.19"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/description" />
 
         <EditText
             android:id="@+id/terrain"
-            android:layout_width="365dp"
+            android:layout_width="130dp"
             android:layout_height="48dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:ems="10"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="48dp"
             android:hint="@string/hint_walkTerrain"
             android:inputType="textPersonName"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/difficulty" />
+            app:layout_constraintTop_toBottomOf="@+id/description" />
 
         <Button
             android:id="@+id/btnAdd"
-            android:layout_width="365dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
+            android:layout_width="330dp"
+            android:layout_height="46dp"
             android:layout_marginStart="8dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="8dp"
             android:text="@string/button_addWalk"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/terrain" />
+            app:layout_constraintTop_toBottomOf="@+id/radioGroupDifficulty" />
 
-        <Button
-            android:id="@+id/chooseImage"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="@string/button_addImage"
-            app:layout_constraintStart_toStartOf="@+id/btnAdd"
-            app:layout_constraintTop_toBottomOf="@+id/btnAdd" />
+        <RadioGroup
+            android:id="@+id/radioGroupDifficulty"
+            android:layout_width="160dp"
+            android:layout_height="140dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/difficulty">
+
+            <RadioButton
+                android:id="@+id/radioEasy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:padding="10dp"
+                android:text="@string/easy"
+                tools:layout_editor_absoluteY="177dp" />
+
+            <RadioButton
+                android:id="@+id/radioMedium"
+                android:layout_width="133dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="12dp"
+                android:padding="10dp"
+                android:text="@string/medium"
+                tools:layout_editor_absoluteY="177dp" />
+
+            <RadioButton
+                android:id="@+id/radioHard"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:padding="10dp"
+                android:text="@string/hard"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:layout_editor_absoluteY="177dp" />
+
+        </RadioGroup>
+
+        <RadioGroup
+            android:id="@+id/radioGroupTerrain"
+            android:layout_width="160dp"
+            android:layout_height="140dp"
+            android:layout_marginTop="16dp"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/radioGroupDifficulty"
+            app:layout_constraintTop_toBottomOf="@+id/terrain">
+
+            <RadioButton
+                android:id="@+id/radioBeach"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:padding="10dp"
+                android:text="@string/beach"
+                tools:layout_editor_absoluteY="177dp" />
+
+            <RadioButton
+                android:id="@+id/radioForest"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="12dp"
+                android:padding="10dp"
+                android:text="@string/forest"
+                tools:layout_editor_absoluteY="177dp" />
+
+            <RadioButton
+                android:id="@+id/radioHill"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:padding="10dp"
+                android:text="@string/hill"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:layout_editor_absoluteY="177dp" />
+
+        </RadioGroup>
 
         <Button
             android:id="@+id/walkLocation"
-            android:layout_width="150dp"
+            android:layout_width="170dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="28dp"
             android:text="@string/button_location"
-            app:layout_constraintEnd_toEndOf="@+id/btnAdd"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toEndOf="@+id/chooseImage"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btnAdd" />
 
-        <ImageView
-            android:id="@+id/walkImage"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.555"
+        <Button
+            android:id="@+id/chooseImage"
+            android:layout_width="170dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="@string/button_addImage"
+            app:layout_constraintEnd_toStartOf="@+id/walkLocation"
+            app:layout_constraintHorizontal_bias="0.457"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/walkLocation"
-            app:layout_constraintVertical_bias="0.173"
-            app:srcCompat="@drawable/ic_launcher_background" />
+            app:layout_constraintTop_toBottomOf="@+id/btnAdd" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <ImageView
+        android:id="@+id/walkImage"
+        android:layout_width="352dp"
+        android:layout_height="161dp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/ic_launcher_background" />
+
+    <!--<NumberPicker
+        android:id="@+id/numberPicker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
+-->
 </androidx.constraintlayout.widget.ConstraintLayout>
