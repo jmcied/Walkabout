@@ -1,5 +1,7 @@
 package org.wit.walkabout.activities
 
+import android.content.res.ColorStateList
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Patterns
 import android.view.KeyEvent
@@ -129,7 +131,9 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener, View.OnFocus
                             }
 
                         }else {
-                            validateEmail()
+                            if(validateEmail()){
+                                // TODO
+                            }
                         }
                     }
                     R.id.passwordET -> {
@@ -139,7 +143,16 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener, View.OnFocus
                             }
 
                         }else {
-                            validatePassword()
+                            if(validatePassword() && mBinding.confirmPasswordET.text!!.isNotEmpty()
+                                && validateConfirmPassword() && valdatePasswordAndConfirmPassword()){
+                                if(mBinding.confirmPasswordTIL.isErrorEnabled){
+                                    mBinding.confirmPasswordTIL.isErrorEnabled = false
+                                }
+                                mBinding.confirmPasswordTIL.apply {
+                                    setStartIconDrawable(R.drawable.check_circle_24)
+                                    setStartIconTintList(ColorStateList.valueOf(Color.GREEN))
+                                }
+                            }
                         }
 
                     }
@@ -150,7 +163,15 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener, View.OnFocus
                             }
 
                         }else {
-                            validateConfirmPassword()
+                            if(validateConfirmPassword() && validatePassword() && valdatePasswordAndConfirmPassword()) {
+                                if (mBinding.passwordTIL.isErrorEnabled) {
+                                    mBinding.passwordTIL.isErrorEnabled = false
+                                }
+                                mBinding.confirmPasswordTIL.apply {
+                                    setStartIconDrawable(R.drawable.check_circle_24)
+                                    setStartIconTintList(ColorStateList.valueOf(Color.GREEN))
+                                }
+                            }
                         }
 
                     }
