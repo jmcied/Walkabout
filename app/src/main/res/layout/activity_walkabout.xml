@@ -84,7 +84,7 @@
             android:layout_width="130dp"
             android:layout_height="48dp"
             android:layout_marginTop="12dp"
-            android:layout_marginEnd="20dp"
+            android:layout_marginEnd="48dp"
             android:hint="@string/hint_walkTerrain"
             android:inputType="textPersonName"
             app:layout_constraintEnd_toEndOf="parent"
@@ -186,7 +186,7 @@
 
         <Button
             android:id="@+id/walkLocation"
-            android:layout_width="150dp"
+            android:layout_width="170dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:layout_marginEnd="28dp"
@@ -196,7 +196,7 @@
 
         <Button
             android:id="@+id/chooseImage"
-            android:layout_width="150dp"
+            android:layout_width="170dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:text="@string/button_addImage"
@@ -209,13 +209,15 @@
 
     <ImageView
         android:id="@+id/walkImage"
-        android:layout_width="359dp"
-        android:layout_height="184dp"
+        android:layout_width="352dp"
+        android:layout_height="161dp"
         android:layout_marginTop="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
+        app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/ic_launcher_background" />
 
     <!--<NumberPicker
